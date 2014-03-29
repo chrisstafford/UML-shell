@@ -3,8 +3,6 @@
 #Assignment: 2 
 #Write a shell script to concatenate lists together, and output the resulting list. Do not include any argument that is a sub-list of the entire list. Remove any redundant items.
 
-currentarg=0
-
 #concatenate all arguments into an initial list before checking for duplicates
 for TempItem in $@
 do
@@ -40,9 +38,6 @@ do
 
 	#reset Duplicate checking
 	isDuplicate=0
-	
-	#increment current record 
-	let "currentarg+=1"
 
 	#check for duplicates
 	for CheckDuplicate in `echo $RevisedList | sed 's/:/\\n/g'`
