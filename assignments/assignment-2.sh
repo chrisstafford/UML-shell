@@ -44,28 +44,21 @@ do
 	#increment current record 
 	let "currentarg+=1"
 
-	#if this is the first item on the list, add it because its not possible that it is a duplicate
-	if [ $currentarg == 1 ]
+	#check for duplicates
+	for CheckDuplicate in `echo $RevisedList | sed 's/:/\\n/g'`
+	do			
+		if [ $RevisedListItem != $CheckDuplicate ] && [ $isDuplicate == 0 ]
+			then
+				isDuplicate=0 #is not duplicate		
+			else
+				isDuplicate=1 #is duplicate
+		fi
+	done
+	
+	#if it is not a duplicate, add to the revised list
+	if [ $isDuplicate == 0 ]
 		then
 			RevisedList="$RevisedList$RevisedListItem:"
-		else	
-			
-			#check for duplicates
-			for CheckDuplicate in `echo $RevisedList | sed 's/:/\\n/g'`
-			do			
-				if [ $RevisedListItem != $CheckDuplicate ] && [ $isDuplicate == 0 ]
-					then
-						isDuplicate=0 #is not duplicate		
-					else
-						isDuplicate=1 #is duplicate
-				fi
-			done
-			
-			#if it is not a duplicate, add to the revised list
-			if [ $isDuplicate == 0 ]
-				then
-					RevisedList="$RevisedList$RevisedListItem:"
-			fi
 	fi
 	
 done
