@@ -10,10 +10,17 @@ if [ -z "$1" ]
 		exit
 fi
 
-Message="Hello <INSERT THE USERS REAL NAME FROM THE PASSWORD FILE>,
+#loop through entire list of recipients
+for Recipient in $@
+do
+
+#create custom message for each recipient
+Message="Hello $RecipientFullName,
 \n\n****** This email is automatically generatated by `whoami`  ******
 \n\nMy instructor requires that I send this message as part of an assignment for class 92.312. The current time and date is `date`.
 \n\nHave a nice day.
 \n\n`whoami`"
 
-echo -e $Message
+done
+
+echo -e $Message #remove later
